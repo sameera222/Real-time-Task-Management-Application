@@ -1,3 +1,9 @@
+# Real Time Task Manager App
+
+Welcome to the React Task Manager App! This application is built using React, Tailwind CSS, Firebase, and React Router. It allows you to manage tasks in real-time, 
+including features such as creating, updating, and deleting tasks.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
