@@ -1,6 +1,6 @@
 import { child, get, ref, remove, set } from "firebase/database";
 import { useEffect, useState } from "react";
-import { db } from "../fire";
+import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
 import { useParams } from "react-router-dom";
 

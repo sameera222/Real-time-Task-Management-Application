@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import InputControl from "./InputControl";
-import { auth } from "../fire";
-import styles from "./Login.module.css";
+import { auth } from "../../firebase";
 
-function Login() {
+
+const Login = () => {
   const navigate = useNavigate();
   const [values, setValues] = useState({
     email: "",
@@ -25,7 +25,7 @@ function Login() {
     signInWithEmailAndPassword(auth, values.email, values.pass)
       .then(async (res) => {
         setSubmitButtonDisabled(false);
-        
+
         navigate("/home");
       })
       .catch((err) => {
@@ -33,41 +33,41 @@ function Login() {
         setErrorMsg(err.message);
       });
   };
-  return (
-    <div className={styles.container}>
-      <div className={styles.innerBox}>
-        <h1 className={styles.heading}>Login</h1>
 
+  return (
+    <section className="login">
+      <div className="loginContainer">
+        <label>Email / Username</label>
         <InputControl
-          label="Email"
           onChange={(event) =>
             setValues((prev) => ({ ...prev, email: event.target.value }))
           }
-          placeholder="Enter email address"
+          placeholder="Enter Email"
         />
+        <label>Password</label>
         <InputControl
-          label="Password"
           onChange={(event) =>
             setValues((prev) => ({ ...prev, pass: event.target.value }))
           }
           placeholder="Enter Password"
         />
-
-        <div className={styles.footer}>
-          <b className={styles.error}>{errorMsg}</b>
-          <button disabled={submitButtonDisabled} onClick={handleSubmission}>
-            Login
-          </button>
-          <p>
-            Already have an account?{" "}
-            <span>
-              <Link to="/signup">Sign up</Link>
-            </span>
-          </p>
+        <p className="errorMsg">{errorMsg}</p>
+        <div className="btnContainer">
+          <>
+            <button onClick={handleSubmission} disabled={submitButtonDisabled}>
+              Sign in
+            </button>
+            <p>
+              Don't have an account ?
+              <span>
+                <Link to="/signup">Sign up</Link>
+              </span>
+            </p>
+          </>
         </div>
       </div>
-    </div>
+    </section>
   );
-}
+};
 
 export default Login;

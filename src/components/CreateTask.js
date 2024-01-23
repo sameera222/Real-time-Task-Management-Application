@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { child, get, ref, set } from "firebase/database";
-import { db } from "../fire";
+import { db } from "../firebase";
 import { v4 as uuidv4 } from "uuid";
 
 export default function CreateTask() {

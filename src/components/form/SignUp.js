@@ -2,12 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import InputControl from "./InputControl";
-import { auth,db } from "../fire";
-
+import { auth, db } from "../../firebase";
 import { ref, set } from "firebase/database";
-import styles from "./Signup.module.css";
 
-function Signup() {
+const Signup = ()=> {
   const navigate = useNavigate();
   const [values, setValues] = useState({
     name: "",
@@ -29,14 +27,13 @@ function Signup() {
       .then(async (res) => {
         setSubmitButtonDisabled(false);
         const user = res.user;
-            
+
         await updateProfile(user, {
           displayName: values.name,
         });
-        set(ref(db, 'users/' + user.uid), {
-     
+        set(ref(db, "users/" + user.uid), {
           email: values.email,
-          id: user.uid
+          id: user.uid,
         });
         navigate("/");
       })
@@ -47,46 +44,48 @@ function Signup() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.innerBox}>
-        <h1 className={styles.heading}>Signup</h1>
-
+    <section className="login">
+      <div className="loginContainer">
+        <div>
+          <h1 className="text-white text-bold">Sign Up</h1>
+        </div>
+        <label> Username</label>
         <InputControl
-          label="Name"
           placeholder="Enter your name"
           onChange={(event) =>
             setValues((prev) => ({ ...prev, name: event.target.value }))
           }
         />
+        <label>Email </label>
         <InputControl
-          label="Email"
-          placeholder="Enter email address"
           onChange={(event) =>
             setValues((prev) => ({ ...prev, email: event.target.value }))
           }
+          placeholder="Enter Email"
         />
+        <label>Password</label>
         <InputControl
-          label="Password"
-          placeholder="Enter password"
           onChange={(event) =>
             setValues((prev) => ({ ...prev, pass: event.target.value }))
           }
+          placeholder="Enter Password"
         />
-
-        <div className={styles.footer}>
-          <b className={styles.error}>{errorMsg}</b>
-          <button onClick={handleSubmission} disabled={submitButtonDisabled}>
-            Signup
-          </button>
-          <p>
-            Already have an account?{" "}
-            <span>
-              <Link to="/">Login</Link>
-            </span>
-          </p>
+        <p className="errorMsg">{errorMsg}</p>
+        <div className="btnContainer">
+          <>
+            <button onClick={handleSubmission} disabled={submitButtonDisabled}>
+              Sign in
+            </button>
+            <p>
+              Already have an account ?
+              <span>
+                <Link to="/">Sign In</Link>
+              </span>
+            </p>
+          </>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

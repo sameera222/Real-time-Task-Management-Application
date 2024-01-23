@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
-import TaskCard from "./TaskCard";
+import TaskCard from "../components/TaskCard";
 import { child, get, ref } from "firebase/database";
-import { db } from "../fire";
+import { db } from "../firebase";
 import { useEffect, useState } from "react";
-import ViewUpdateDeletepage from "./ViewUpdateDeletepage";
+
 
 export default function Home() {
   const [tasksList, setTasksList] = useState({
@@ -43,7 +43,9 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="container mx-auto my-8">
+    <main className=
+    " mx-auto my-8"
+    >
       <div className="flex flex-wrap justify-between">
         <div className="w-full md:w-1/2 lg:w-1/4 mb-4 md:mb-0 mx-3">
           <div className="bg-yellow-400 text-black px-3 py-2 rounded">TODO</div>
